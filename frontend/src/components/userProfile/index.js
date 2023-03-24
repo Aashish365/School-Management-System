@@ -1,3 +1,3 @@
 export default function UserProfile() {
-	return <>This is the User Profile.</>;
+	return <div>This is the User Profile.</div>;
 }

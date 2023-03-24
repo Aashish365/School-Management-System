@@ -1,3 +1,4 @@
+import "./App.scss";
 import AdminDashboard from "./components/adminDashboard";
 import Login from "./components/login";
 import UserProfile from "./components/userProfile";

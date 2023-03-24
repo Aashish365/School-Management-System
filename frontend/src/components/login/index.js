@@ -1,3 +1,3 @@
 export default function Login() {
-	return <>This is the Login form.</>;
+	return <div>This is the Login form.</div>;
 }

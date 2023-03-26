@@ -1,3 +1,11 @@
+import SignIn from "./signin";
+import SignUp from "./signup";
+
 export default function Login() {
-	return <div>This is the Login form.</div>;
+	return (
+		<div>
+			<SignIn />
+			<SignUp />
+		</div>
+	);
 }

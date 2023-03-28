@@ -3,7 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const usersRoute = require("./routes/user");
+const signupRoute = require("./routes/signup");
 
 const app = express();
 app.use(cors());
@@ -15,7 +15,7 @@ mongoose.connect(uri, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 });
-app.use("/user", usersRoute);
+app.use("/signup", signupRoute);
 
 app.listen(process.env.PORT, () => {
 	console.log("running on port " + process.env.PORT);

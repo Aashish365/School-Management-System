@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import xss from "xss";
 import {
 	isValidEmail,
 	isValidPassword,
@@ -15,7 +16,7 @@ export default function SignUp() {
 	const SubmitHandler = (e) => {
 		e.preventDefault();
 		if (passwordStatus.status && emailStatus.status) {
-			fetch("http://localhost:4000/user/signUp", {
+			fetch("http://localhost:4000/signup", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -40,8 +41,8 @@ export default function SignUp() {
 	};
 
 	const emailHandler = (e) => {
-		setEmailStatus(isValidEmail(e.target.value));
-		setEmail(e.target.value);
+		setEmailStatus(isValidEmail(xss(e.target.value)));
+		setEmail(xss(e.target.value));
 	};
 	const passwordHandler = (e) => {
 		setPasswordStatus(isValidPassword(e.target.value));

@@ -6,10 +6,11 @@ export default function SignIn() {
 	const [password, setPassword] = useState("");
 	const [message, setMessage] = useState("");
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [cookie, setCookie] = useState("");
 
+	let userName = "";
 	const SubmitHandler = (e) => {
 		e.preventDefault();
-
 		fetch("http://localhost:4000/signin", {
 			method: "POST",
 			headers: {
@@ -26,6 +27,8 @@ export default function SignIn() {
 				setPassword("");
 				setMessage(response.message);
 				setIsLoggedIn(response.loggedIn);
+				setCookie(response.token);
+				userName = response.name;
 			})
 			.catch((err) => console.log(err));
 	};
@@ -40,6 +43,7 @@ export default function SignIn() {
 	};
 
 	if (isLoggedIn) {
+		document.cookie = `token=${cookie};`;
 		return <Navigate to="/user" />;
 	}
 

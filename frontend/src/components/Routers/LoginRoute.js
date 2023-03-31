@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+	BrowserRouter as Router,
+	Routes,
+	Route,
+	Switch,
+} from "react-router-dom";
 
 // import pages //
 import UserProfile from "../userProfile";

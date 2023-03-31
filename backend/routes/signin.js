@@ -26,8 +26,15 @@ router.post("/", async (req, res) => {
 
 		// Send the JWT to the front-end
 		const token = user.token;
-		res.cookie("token", token);
-		res.status(200).json({ loggedIn: "true", message: "successful login" });
+		res
+			.status(200)
+			.json({
+				name: user.name,
+				email: user.email,
+				loggedIn: "true",
+				message: "successful login",
+				token: token,
+			});
 	});
 });
 module.exports = router;

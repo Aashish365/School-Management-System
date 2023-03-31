@@ -1,10 +1,10 @@
 import "./App.scss";
-import Login from "./components/login";
+import LoginRoute from "./components/Routers/LoginRoute";
 
 function App() {
 	return (
 		<div className="App">
-			<Login />
+			<LoginRoute />
 		</div>
 	);
 }

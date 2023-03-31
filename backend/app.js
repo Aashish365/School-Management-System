@@ -3,7 +3,11 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+
+const jwtValidator = require("./middlewares/jwtValidator");
+
 const signupRoute = require("./routes/signup");
+const signinRoute = require("./routes/signin");
 
 const app = express();
 app.use(cors());
@@ -15,7 +19,10 @@ mongoose.connect(uri, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 });
+
 app.use("/signup", signupRoute);
+app.use("/signin", signinRoute);
+app.use("/user", jwtValidator);
 
 app.listen(process.env.PORT, () => {
 	console.log("running on port " + process.env.PORT);

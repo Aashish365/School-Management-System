@@ -14,6 +14,7 @@ router.post("/", async (req, res) => {
 				res.status(400).json({ error: "Email already exists" });
 			} else {
 				const newUser = new User({ email: xss(email), password: hash });
+
 				await newUser.save();
 				res.json({ success: true });
 			}

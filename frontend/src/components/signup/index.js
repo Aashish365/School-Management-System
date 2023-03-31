@@ -1,9 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import xss from "xss";
-import {
-	isValidEmail,
-	isValidPassword,
-} from "../../../utilities/LoginValidator";
+import { isValidEmail, isValidPassword } from "../../utilities/LoginValidator";
 
 export default function SignUp() {
 	const [email, setEmail] = useState("");
@@ -79,6 +76,9 @@ export default function SignUp() {
 				</form>
 				<div>{message}</div>
 			</div>
+			<button>
+				<a href="/">Already SignUp?</a>
+			</button>
 		</div>
 	);
 }

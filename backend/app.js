@@ -8,6 +8,7 @@ const jwtValidator = require("./middlewares/jwtValidator");
 
 const signupRoute = require("./routes/signup");
 const signinRoute = require("./routes/signin");
+const signoutRoute = require("./routes/signout");
 
 const app = express();
 app.use(cors());
@@ -21,6 +22,7 @@ mongoose.connect(uri, {
 });
 app.use("/signup", signupRoute);
 app.use("/signin", signinRoute);
+app.use("/signout", signoutRoute);
 
 app.listen(process.env.PORT, () => {
 	console.log("running on port " + process.env.PORT);

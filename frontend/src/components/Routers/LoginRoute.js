@@ -1,14 +1,9 @@
-import {
-	BrowserRouter as Router,
-	Routes,
-	Route,
-	Switch,
-} from "react-router-dom";
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import pages //
 import UserProfile from "../userProfile";
 import SignIn from "../signin";
 import SignUp from "../signup";
+import NotFoundPage from "../NotFoundPage/Index";
 
 export default function LoginRoute() {
 	const pages = [
@@ -38,6 +33,7 @@ export default function LoginRoute() {
 							<Route path={page.link} element={page.elem} key={page.link} />
 						);
 					})}
+					<Route path="*" element={<NotFoundPage />} />
 				</Routes>
 			</Router>
 		</div>

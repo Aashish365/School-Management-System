@@ -19,10 +19,8 @@ mongoose.connect(uri, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 });
-
 app.use("/signup", signupRoute);
 app.use("/signin", signinRoute);
-app.use("/user", jwtValidator);
 
 app.listen(process.env.PORT, () => {
 	console.log("running on port " + process.env.PORT);

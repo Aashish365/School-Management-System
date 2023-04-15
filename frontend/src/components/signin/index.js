@@ -1,17 +1,45 @@
 import { Navigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+
 import xss from "xss";
+
 export default function SignIn() {
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [message, setMessage] = useState("");
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const [cookie, setCookie] = useState("");
 
-	let userName = "";
-	const SubmitHandler = (e) => {
+	const savedCookie = Cookies.get("Token");
+
+	useEffect(() => {
+		fetch("http://localhost:4000/signin/validateToken", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				cookie: savedCookie,
+			}),
+		})
+			.then((response) => response.json())
+			.then((response) => {
+				if (response.loggedIn) {
+					setIsLoggedIn(response.loggedIn);
+				}
+			})
+			.catch((err) => console.log(err));
+	}, []);
+
+	function resetInputField() {
+		setEmail("");
+		setPassword("");
+	}
+
+	const SubmitHandler = async (e) => {
 		e.preventDefault();
-		fetch("http://localhost:4000/signin", {
+		await fetch("http://localhost:4000/signin", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -23,27 +51,24 @@ export default function SignIn() {
 		})
 			.then((response) => response.json())
 			.then((response) => {
-				setEmail("");
-				setPassword("");
+				if (response.loggedIn) {
+					setIsLoggedIn(response.loggedIn);
+					Cookies.set("Token", response.token); // store the same cookie in the browser
+					resetInputField();
+				}
 				setMessage(response.message);
-				setIsLoggedIn(response.loggedIn);
-				setCookie(response.token);
-				userName = response.name;
 			})
 			.catch((err) => console.log(err));
 	};
 
 	const emailHandler = (e) => {
-		// setEmailStatus(isValidEmail(xss(e.target.value)));
 		setEmail(xss(e.target.value));
 	};
 	const passwordHandler = (e) => {
-		// setPasswordStatus(isValidPassword(e.target.value));
 		setPassword(e.target.value);
 	};
 
 	if (isLoggedIn) {
-		document.cookie = `token=${cookie};`;
 		return <Navigate to="/user" />;
 	}
 

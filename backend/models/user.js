@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 
 const userSchema = new mongoose.Schema({
-	// name: {
-	// 	type: String,
-	// 	required: true,
-	// },
+	name: {
+		type: String,
+		required: true,
+	},
 	email: {
 		type: String,
 		required: true,
@@ -15,23 +15,21 @@ const userSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	// phoneNumber: {
-	// 	type: String,
-	// 	required: true,
-	// },
-	// address: {
-	// 	type: String,
-	// 	required: true,
-	// },
-	// gender: {
-	// 	type: String,
-	// 	enum: ["male", "female", "other"],
-	// },
-	// role: {
-	// 	type: String,
-	// 	enum: ["student", "faculty", "admin"],
-	// 	default: "student",
-	// },
+	phoneNumber: {
+		type: String,
+		required: true,
+	},
+	address: {
+		type: String,
+	},
+	gender: {
+		type: String,
+	},
+	role: {
+		type: String,
+		default: "student",
+		required: true,
+	},
 	date: {
 		type: Date,
 		default: Date.now,

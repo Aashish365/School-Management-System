@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-export default function RadioButton({ options, setGender }) {
+export default function RadioButton({ options, setterFunction }) {
 	const handleSelectedOption = (e) => {
-		setGender(e.target.value);
+		setterFunction(e.target.value);
 	};
 	return (
 		<div>

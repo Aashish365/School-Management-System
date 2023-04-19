@@ -32,11 +32,6 @@ export default function SignIn() {
 			.catch((err) => console.log(err));
 	}, []);
 
-	function resetInputField() {
-		setEmail("");
-		setPassword("");
-	}
-
 	const SubmitHandler = async (e) => {
 		e.preventDefault();
 		await fetch("http://localhost:4000/signin", {
@@ -54,7 +49,6 @@ export default function SignIn() {
 				if (response.loggedIn) {
 					setIsLoggedIn(response.loggedIn);
 					Cookies.set("Token", response.token); // store the same cookie in the browser
-					resetInputField();
 				}
 				setMessage(response.message);
 			})

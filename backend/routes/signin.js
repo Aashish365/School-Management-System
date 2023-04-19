@@ -47,6 +47,7 @@ router.post("/", async (req, res, next) => {
 			loggedIn: true,
 			message: "successful login",
 			token: user.token,
+			email: user.email,
 		});
 	});
 });

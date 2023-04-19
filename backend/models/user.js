@@ -1,7 +1,24 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 
+const attendanceSchema = new mongoose.Schema({
+	date: { type: Date },
+	isPresent: {
+		type: Boolean,
+	},
+});
+
+const subjectSchema = new mongoose.Schema({
+	title: { type: String, required: true },
+	ca_marks: { type: Number, default: 0 },
+	attendance: { type: [attendanceSchema] },
+	teacherId: { type: String },
+});
+
 const userSchema = new mongoose.Schema({
+	regNumber: {
+		type: String,
+	},
 	fName: {
 		type: String,
 		required: true,
@@ -66,13 +83,22 @@ const userSchema = new mongoose.Schema({
 		type: Date,
 		default: Date.now,
 	},
+	amount: {
+		type: String,
+	},
+	subjects: { type: [subjectSchema] },
+
 	jwtToken: { type: String },
 });
 
 userSchema.methods.generateJWT = function () {
-	const token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET, {
-		expiresIn: "10m",
-	});
+	const token = jwt.sign(
+		{ _id: this._id, email: this.email },
+		process.env.JWT_SECRET,
+		{
+			expiresIn: "30d",
+		}
+	);
 	this.token = token;
 	return this.save().then(() => token);
 };

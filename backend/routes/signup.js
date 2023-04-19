@@ -2,6 +2,7 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const router = express.Router();
 const User = require("../models/user");
+const regNumber = require("../helperfunctions/RegnumberGenerator");
 
 // user/createUser --->>> Route
 router.post("/", async (req, res) => {
@@ -43,10 +44,11 @@ router.post("/student", async (req, res) => {
 		g_address,
 	} = req.body;
 
-	console.log(req.body);
+	const reg = regNumber();
 	bcrypt.hash(password, 10, async (err, hash) => {
 		try {
 			const newUser = new User({
+				regNumber: reg,
 				fName: fName,
 				lName: lName,
 				email: email,
@@ -86,15 +88,17 @@ router.post("/teacher", async (req, res) => {
 		subject,
 	} = req.body;
 
+	const reg = regNumber();
+
 	bcrypt.hash(password, 10, async (err, hash) => {
 		try {
 			const newUser = new User({
+				regNumber: reg,
 				email: email,
 				password: hash,
 				fName: fName,
 				lName: lName,
 				gender: gender,
-				password: password,
 				role: role,
 				phoneNumber: phoneNumber,
 				address: address,

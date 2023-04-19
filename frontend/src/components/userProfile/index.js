@@ -1,9 +1,33 @@
 import Cookies from "js-cookie";
-import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Navigate, useLocation } from "react-router-dom";
+import Attendance from "../Attendance";
+import StudentProfile from "./StudentProfile";
+import TeacherProfile from "./TeacherProfile";
 
 export default function UserProfile() {
 	const [loggedIn, setLoggedIn] = useState(true);
+	const [data, setData] = useState({});
+	const savedCookie = Cookies.get("Token");
+
+	useEffect(() => {
+		fetch("http://localhost:4000/getData", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				cookie: savedCookie,
+			}),
+		})
+			.then((response) => response.json())
+			.then((response) => {
+				if (response.success) {
+					setData(response.data);
+				}
+			})
+			.catch((err) => console.log(err));
+	}, []);
 
 	const logoutHandler = () => {
 		fetch("http://localhost:4000/signout/", {
@@ -20,6 +44,7 @@ export default function UserProfile() {
 				console.error(error);
 			});
 	};
+	console.log(data);
 
 	if (!loggedIn) {
 		return <Navigate to="/" />;
@@ -27,7 +52,11 @@ export default function UserProfile() {
 
 	return (
 		<div>
-			<div>This is the User Profile.</div>
+			{data.role === "student" && <StudentProfile data={data} />}
+			{data.role === "faculty" && <TeacherProfile data={data} />}
+
+			{/* <Attendance role={data.role} subjects={data.subjects} /> */}
+
 			<button onClick={logoutHandler}>Logout</button>
 		</div>
 	);

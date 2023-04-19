@@ -105,7 +105,7 @@ export default function TeacherDetail({ role, email, password }) {
 					<input
 						type="string"
 						value={subject}
-						placeholder="Address"
+						placeholder="Subject"
 						onChange={(e) => setSubject(xss(e.target.value))}
 					/>
 				</div>

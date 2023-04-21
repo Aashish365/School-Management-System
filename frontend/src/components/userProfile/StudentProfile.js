@@ -1,3 +1,8 @@
-export default function StudentProfile() {
-	return <div>This is the student Profile.</div>;
+import Face from "./face";
+export default function StudentProfile({ data }) {
+	return (
+		<div className="studentProfile">
+			<Face data={data} />
+		</div>
+	);
 }

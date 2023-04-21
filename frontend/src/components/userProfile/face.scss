@@ -1,0 +1,76 @@
+.section{
+  height: 100vh;
+}
+
+.profileSection{
+    padding: 10px;
+    width: 100%;
+    background-color: rgb(47, 71, 128);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+@keyframes moveLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(200px);
+  }
+  80%{
+    opacity:.8;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes moveRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+  80%{
+    opacity:.8;
+    transform: translateX(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.avatar{
+    transition: all .2s;
+    animation: moveLeft 1s linear;
+    padding: 2px;
+    border: 5px solid red;
+}
+
+.pesonalInfo{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    color: rgb(227, 225, 225);
+    transition: all .2s;
+    animation: moveRight 1s linear;
+
+    & .name{
+        font-size: 30px;
+        font-weight: 100;
+        color: rgb(227, 225, 225);
+    }
+
+    & .myclass{
+        text-transform: uppercase;
+    }
+}
+
+
+
+
+

@@ -1,4 +1,9 @@
 
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 
 // utilities
 
@@ -17,7 +22,10 @@
 
 @import "./components/Attendance/style.scss";
 
+@import "./utilities/style.scss";
 
+@import "./components/userProfile/face.scss";
+@import "./components/userProfile/teacherProfile.scss";
 
 
 /// usable components

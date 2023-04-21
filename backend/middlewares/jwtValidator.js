@@ -3,14 +3,14 @@ const user = require("../models/user");
 
 const verifyToken = (req, res, next) => {
 	if (!req.body.cookie) {
-		return res.status(401).json({
+		return res.json({
 			loggedIn: false,
 			message: "empty Token",
 		});
 	}
 	jwt.verify(req.body.cookie, process.env.JWT_SECRET, (err, decoded) => {
 		if (err) {
-			return res.status(401).json({
+			return res.json({
 				loggedIn: false,
 				message: "Invalid Token",
 			});

@@ -4,7 +4,6 @@ const router = express.Router();
 const User = require("../models/user");
 const regNumber = require("../helperfunctions/RegnumberGenerator");
 
-// user/createUser --->>> Route
 router.post("/", async (req, res) => {
 	const { email } = req.body;
 	try {
@@ -43,7 +42,6 @@ router.post("/student", async (req, res) => {
 		g_number,
 		g_address,
 	} = req.body;
-
 	const reg = regNumber();
 	bcrypt.hash(password, 10, async (err, hash) => {
 		try {

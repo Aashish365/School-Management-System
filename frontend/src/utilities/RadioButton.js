@@ -1,22 +1,22 @@
 import { useState } from "react";
 
-export default function RadioButton({ options, setterFunction }) {
+export default function RadioButton({ options, setterFunction, studentClass }) {
 	const handleSelectedOption = (e) => {
 		setterFunction(e.target.value);
 	};
 	return (
-		<div>
+		<div className="radioBtns">
 			{options.map((option) => {
 				return (
-					<label key={option.value}>
+					<div className="radio" key={option.value}>
 						<input
 							name="common"
 							type="radio"
 							value={option.value}
 							onChange={handleSelectedOption}
 						/>
-						{option.label}
-					</label>
+						<label>{option.label}</label>
+					</div>
 				);
 			})}
 		</div>

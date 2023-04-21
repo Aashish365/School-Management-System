@@ -1,0 +1,19 @@
+.radioBtns{
+    display: flex;
+    justify-content: space-around;
+
+    & .radio {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        & label{
+            padding: 5px;
+        }
+        & input{
+               padding: 5px; 
+        }
+    }
+
+    
+
+}

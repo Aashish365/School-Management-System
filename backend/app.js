@@ -10,6 +10,7 @@ const signupRoute = require("./routes/signup");
 const signinRoute = require("./routes/signin");
 const signoutRoute = require("./routes/signout");
 const getDataRoute = require("./routes/getData");
+const updateRoute = require("./routes/update");
 
 const app = express();
 app.use(cors());
@@ -25,6 +26,7 @@ app.use("/signup", signupRoute);
 app.use("/signin", signinRoute);
 app.use("/signout", signoutRoute);
 app.use("/getData", getDataRoute);
+app.use("/update", updateRoute);
 
 app.listen(process.env.PORT, () => {
 	console.log("running on port " + process.env.PORT);

@@ -2,7 +2,9 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 
 const attendanceSchema = new mongoose.Schema({
-	date: { type: Date },
+	date: {
+		type: String,
+	},
 	isPresent: {
 		type: Boolean,
 	},

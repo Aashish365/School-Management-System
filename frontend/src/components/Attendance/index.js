@@ -6,12 +6,11 @@ import ClassesList from "./ClassesList";
 export default function MarkAttendance() {
 	const [studentClass, setStudentClass] = useState("1");
 	const [data, setData] = useState([]);
+
 	const savedCookie = Cookies.get("Token");
 
-	useEffect(() => getStudentsHandler, []);
-
-	const getStudentsHandler = async () => {
-		await fetch("http://localhost:4000/getData/byclass", {
+	useEffect(() => {
+		fetch("http://localhost:4000/getData/byclass", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -28,7 +27,7 @@ export default function MarkAttendance() {
 				}
 			})
 			.catch((err) => console.log(err));
-	};
+	}, [studentClass, savedCookie]);
 
 	return (
 		<div className="attendanceSection">

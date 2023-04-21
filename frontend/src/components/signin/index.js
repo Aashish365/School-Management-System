@@ -10,26 +10,27 @@ export default function SignIn() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [message, setMessage] = useState("");
-
 	const savedCookie = Cookies.get("Token");
 
 	useEffect(() => {
-		fetch("http://localhost:4000/signin/validateToken", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				cookie: savedCookie,
-			}),
-		})
-			.then((response) => response.json())
-			.then((response) => {
-				if (response.loggedIn) {
-					setIsLoggedIn(response.loggedIn);
-				}
+		if (savedCookie) {
+			fetch("http://localhost:4000/signin/validateToken", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					cookie: savedCookie,
+				}),
 			})
-			.catch((err) => console.log(err));
+				.then((response) => response.json())
+				.then((response) => {
+					if (response.loggedIn) {
+						setIsLoggedIn(response.loggedIn);
+					}
+				})
+				.catch((err) => console.log(err));
+		}
 	}, []);
 
 	const SubmitHandler = async (e) => {

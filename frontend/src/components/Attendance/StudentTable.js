@@ -40,22 +40,26 @@ export default function StudentTable({ data }) {
 			<div className="table">
 				<div className="studentBar studentBar_title">
 					<div className="regNo">Registration Number</div>
+					<div className="email">Email</div>
 					<div className="name">Full Name</div>
 					<div className="status">Present/Absent</div>
 				</div>
 				{data.map((user) => {
 					return (
 						<StudentBar
+							key={user.regNumber}
 							addPresentees={addPresentees}
 							removePresentees={removePresentees}
-							key={user.regNumber}
 							regNumber={user.regNumber}
+							stdemail={user.email}
 							fullName={user.fName + " " + user.lName}
 						/>
 					);
 				})}
+				<button className="markAttendanceBtn" onClick={markAttendanceHandler}>
+					Mark Attendance
+				</button>
 			</div>
-			<button onClick={markAttendanceHandler}>Mark Attendance</button>
 		</div>
 	);
 }

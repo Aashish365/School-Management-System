@@ -2,7 +2,6 @@ import { useState } from "react";
 
 export default function ClassesList({ setterFunction }) {
 	const [activeBtn, setActiveBtn] = useState("1");
-
 	const classList = [
 		{ value: "1", label: "Class 1" },
 		{ value: "2", label: "Class 2" },

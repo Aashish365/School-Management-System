@@ -68,6 +68,14 @@
     & .myclass{
         text-transform: uppercase;
     }
+
+  @media screen and (max-width: 600px){
+        justify-content: center;
+        align-items: center;
+        & .name{
+          font-size: 25px;
+        }
+  }
 }
 
 

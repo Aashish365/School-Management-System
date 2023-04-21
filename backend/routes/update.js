@@ -48,7 +48,8 @@ router.post("/markAttendance", async (req, res, next) => {
 				subject.attendance.push(attendance);
 			}
 		}
-		await student.save();
+		// await student.save();
+		/// uncomment this after project completion
 	});
 
 	return res.status(200).json({

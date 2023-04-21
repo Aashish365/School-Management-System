@@ -1,8 +1,6 @@
 import Avatar, { genConfig } from "react-nice-avatar";
 
 export default function Face({ data }) {
-	console.log(data);
-
 	let config = "";
 	if (data.gender === "male") {
 		config = genConfig({ sex: "man" });

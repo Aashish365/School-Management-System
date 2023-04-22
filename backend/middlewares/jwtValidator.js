@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const user = require("../models/user");
 
 const verifyToken = (req, res, next) => {
-	if (!req.body.cookie) {
+	if (req.body.cookie === "") {
 		return res.json({
 			loggedIn: false,
 			message: "empty Token",

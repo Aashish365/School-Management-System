@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import StudentTable from "./StudentTable";
 import ClassesList from "./ClassesList";
 
-export default function MarkAttendance() {
+export default function MarkAttendance({ setActiveSection }) {
 	const [studentClass, setStudentClass] = useState("1");
 	const [data, setData] = useState([]);
 
@@ -32,7 +32,7 @@ export default function MarkAttendance() {
 	return (
 		<div className="attendanceSection">
 			<ClassesList setterFunction={setStudentClass} />
-			<StudentTable data={data} />
+			<StudentTable data={data} setActiveSection={setActiveSection} />
 		</div>
 	);
 }

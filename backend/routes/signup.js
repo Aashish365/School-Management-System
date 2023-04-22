@@ -9,7 +9,7 @@ router.post("/", async (req, res) => {
 	try {
 		const emailExist = await User.findOne({ email: email }); // check in the database if email is already there or not.
 		if (emailExist) {
-			res.status(401).json({
+			res.status(200).json({
 				msg: "Email already exists",
 				moveForward: false,
 			});

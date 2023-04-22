@@ -3,10 +3,11 @@ import Cookies from "js-cookie";
 import MarkAttendance from "../Attendance";
 import Face from "./face";
 import { Navigate } from "react-router-dom";
+import Summary from "./Summary";
 
 export default function TeacherProfile({ data }) {
 	const [activeSection, setActiveSection] = useState("home");
-	const sections = ["home", "markAttendance", "progress"];
+	const sections = ["home", "markAttendance", "attendance"];
 	const [loggedIn, setLoggedIn] = useState(true);
 
 	const logoutHandler = () => {
@@ -16,9 +17,12 @@ export default function TeacherProfile({ data }) {
 				"Content-Type": "application/json",
 			},
 		})
+			.then((response) => response.json())
 			.then((response) => {
-				setLoggedIn(response.body.loggedIn);
-				Cookies.set("Token", "");
+				if (response.success) {
+					setLoggedIn(response.loggedIn);
+					Cookies.set("Token", "");
+				}
 			})
 			.catch((error) => {
 				console.error(error);
@@ -51,7 +55,10 @@ export default function TeacherProfile({ data }) {
 
 			<div className="profileBody">
 				{activeSection === "home" && <Face data={data} />}
-				{activeSection === "markAttendance" && <MarkAttendance />}
+				{activeSection === "markAttendance" && (
+					<MarkAttendance setActiveSection={setActiveSection} />
+				)}
+				{activeSection === "attendance" && <Summary data={data} />}
 			</div>
 		</div>
 	);

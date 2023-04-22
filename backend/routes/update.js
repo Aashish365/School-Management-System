@@ -17,10 +17,31 @@ function getCurrentDateString() {
 }
 
 router.post("/markAttendance", async (req, res, next) => {
-	const { cookie, presentStudents } = req.body;
-
+	const { cookie, presentStudents, studentClass } = req.body;
 	cookieInfo = jwt.verify(cookie, process.env.JWT_SECRET);
+
 	const user = await User.findOne({ role: "faculty", email: cookieInfo.email });
+
+	const attendance = {
+		date: getCurrentDateString(),
+		isPresent: true,
+		studentClass: studentClass,
+	};
+
+	if (!user.teacherAttendance) {
+		user.teacherAttendance.push(attendance);
+	} else {
+		// check if attendance on particular day already exist
+		const teacherAttendance = user.teacherAttendance.find(
+			(particularDay) =>
+				particularDay.date === getCurrentDateString() &&
+				particularDay.studentClass === studentClass
+		);
+		if (!teacherAttendance) {
+			user.teacherAttendance.push(attendance);
+		}
+	}
+	await user.save();
 
 	presentStudents.map(async (regNumber) => {
 		const title = user.subject;
@@ -28,6 +49,7 @@ router.post("/markAttendance", async (req, res, next) => {
 		let subject = student.subjects.find((sub) => sub.title === title);
 		if (!subject) {
 			const attendance = {
+				date: getCurrentDateString(),
 				isPresent: true,
 			};
 			subject = {
@@ -48,8 +70,7 @@ router.post("/markAttendance", async (req, res, next) => {
 				subject.attendance.push(attendance);
 			}
 		}
-		// await student.save();
-		/// uncomment this after project completion
+		await student.save();
 	});
 
 	return res.status(200).json({

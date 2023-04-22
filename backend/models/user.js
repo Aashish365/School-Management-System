@@ -10,6 +10,17 @@ const attendanceSchema = new mongoose.Schema({
 	},
 });
 
+const attendanceSchemaTeacher = new mongoose.Schema({
+	date: {
+		type: String,
+	},
+	studentClass: {
+		type: String,
+	},
+	isPresent: {
+		type: Boolean,
+	},
+});
 const subjectSchema = new mongoose.Schema({
 	title: { type: String, required: true },
 	ca_marks: { type: Number, default: 0 },
@@ -89,6 +100,10 @@ const userSchema = new mongoose.Schema({
 		type: String,
 	},
 	subjects: { type: [subjectSchema] },
+
+	teacherAttendance: {
+		type: [attendanceSchemaTeacher],
+	},
 
 	jwtToken: { type: String },
 });

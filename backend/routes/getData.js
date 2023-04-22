@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+const jwtValidator = require("../middlewares/jwtValidator");
 
 router.post("/", async (req, res, next) => {
 	const { cookie } = req.body;
@@ -35,5 +36,5 @@ router.post("/byclass", async (req, res, next) => {
 		data: students,
 	});
 });
-
+router.post("/validateToken", jwtValidator);
 module.exports = router;

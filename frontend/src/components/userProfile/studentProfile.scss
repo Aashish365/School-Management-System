@@ -1,0 +1,98 @@
+.studentProfile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    & .navContainer{
+        background-color: rgb(55, 87, 163);
+        padding: 5px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        & .navBar{
+            padding: 5px;
+            width: 30%;
+            display: flex;
+            align-items: center;
+            font-weight: 400;
+            justify-content: space-around;
+
+
+            & .navButton{
+                    color: white;
+                    text-transform: uppercase;
+                    transition: all .2s;
+                    padding: 5px 20px;
+                    border-radius: 10px;
+                    background-color: rgb(55, 87, 163);
+
+                    &:hover{
+                        cursor: pointer;
+                        background-color: rgb(11, 74, 210);
+                    }
+                    &:active{
+                        cursor: pointer;
+                        transform: translateY(2px);
+                    }
+            }
+            
+            @media screen and (max-width: 1170px){
+                width: 35%;
+                border-radius: 7px;
+                & .navButton{
+                    padding:4px 10px ;
+                }
+
+            }
+            @media screen and (max-width: 900px){
+                width: 45%;
+                border-radius: 5px;
+                & .navButton{
+                    padding:4px 5px ;
+                }
+
+            }
+              @media screen and (max-width: 780px){
+                width: 55%;
+                border-radius: 4px;
+                & .navButton{
+                    padding:4px 5px ;
+                }
+
+            }
+
+             @media screen and (max-width: 600px){
+                width: 65%;
+                border-radius: 2px;
+                & .navButton{
+                    padding:4px 5px ;
+                    font-size: 15px;
+                }
+
+            }
+        }
+        .logoutButton{
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: all .2s;
+            padding: 5px 20px;
+            border-radius: 10px;
+            background-color: rgb(55, 87, 163);   
+            &:hover{
+                cursor: pointer;
+                background-color: rgb(11, 74, 210);
+            }
+             &:active{
+                cursor: pointer;
+                transform: translateY(2px);
+            }              
+        }
+    }
+
+    & .profileBody{
+        width: 100%;
+    }
+}

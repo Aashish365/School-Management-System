@@ -1,9 +1,11 @@
+import { useState } from "react";
 import StudentBar from "./StudentBar";
 import Cookies from "js-cookie";
-export default function StudentTable({ data }) {
+import PopUp from "./Popup";
+export default function StudentTable({ data, setActiveSection }) {
+	const [displayPopUp, setDisplayPopUp] = useState(false);
 	const savedCookie = Cookies.get("Token");
 	let presentStudents = [];
-
 	const addPresentees = (regNumber) =>
 		(presentStudents = Array.from(new Set([...presentStudents, regNumber])));
 	const removePresentees = (regNumber) => {
@@ -23,12 +25,13 @@ export default function StudentTable({ data }) {
 			body: JSON.stringify({
 				cookie: savedCookie,
 				presentStudents: presentStudents,
+				studentClass: data[0].studentClass,
 			}),
 		})
 			.then((response) => response.json())
 			.then((response) => {
 				if (response.success) {
-					// DisplayPopup with success msg
+					setDisplayPopUp(true);
 					console.log("Attendance marked");
 				}
 			})
@@ -59,6 +62,14 @@ export default function StudentTable({ data }) {
 				<button className="markAttendanceBtn" onClick={markAttendanceHandler}>
 					Mark Attendance
 				</button>
+				{displayPopUp && (
+					<div className="popUpOuter">
+						<PopUp
+							setDisplayPopUp={setDisplayPopUp}
+							setActiveSection={setActiveSection}
+						/>
+					</div>
+				)}
 			</div>
 		</div>
 	);

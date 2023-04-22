@@ -10,9 +10,9 @@ export default function SignIn() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [message, setMessage] = useState("");
-	const savedCookie = Cookies.get("Token");
 
 	useEffect(() => {
+		const savedCookie = Cookies.get("Token");
 		if (savedCookie) {
 			fetch("http://localhost:4000/signin/validateToken", {
 				method: "POST",
@@ -30,6 +30,8 @@ export default function SignIn() {
 					}
 				})
 				.catch((err) => console.log(err));
+		} else {
+			setIsLoggedIn(false);
 		}
 	}, []);
 
@@ -69,8 +71,10 @@ export default function SignIn() {
 
 	return (
 		<div className="signin">
+			<h1 className="signin_title">Welcome to School Management System</h1>
 			<div className="signin_container">
-				<form onSubmit={SubmitHandler}>
+				<h1 className="signin_title">Sign In</h1>
+				<form className="signinForm" onSubmit={SubmitHandler}>
 					<div className="email">
 						<label htmlFor="email">Email</label>
 						<input
@@ -81,7 +85,7 @@ export default function SignIn() {
 							onChange={emailHandler}
 						/>
 					</div>
-					<div className="Password">
+					<div className="password">
 						<label htmlFor="password">Password</label>
 						<input
 							name="password"
@@ -91,13 +95,15 @@ export default function SignIn() {
 							onChange={passwordHandler}
 						/>
 					</div>
-					<button type="submit">SignIn</button>
+					<button className="signinBtn" type="submit">
+						SignIn
+					</button>
 				</form>
-				<div>{message}</div>
+				<div className="error">{message}</div>
+				<div className="haventSignup">
+					<a href="/signup">Haven't Signup?</a>
+				</div>
 			</div>
-			<button>
-				<a href="/signup">Haven't Signup?</a>
-			</button>
 		</div>
 	);
 }

@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 import Summary from "./Summary";
 export default function StudentProfile({ data }) {
 	const [activeSection, setActiveSection] = useState("home");
-	const sections = ["home", "attendance", "homework"];
+	const sections = ["home", "attendance"];
 	const [loggedIn, setLoggedIn] = useState(true);
 
 	const logoutHandler = () => {

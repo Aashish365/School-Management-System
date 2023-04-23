@@ -78,18 +78,22 @@ export default function StudentDetail({ email, password, role }) {
 	}
 
 	return (
-		<form onSubmit={submitHandler} className="details">
-			<div className="studentDetails">
+		<form onSubmit={submitHandler} className="studentDetailsForm">
+			<h1>Enter Your Details here</h1>
+			<div className="studentDetailsContainer">
+				<h2>Student Details</h2>
 				<div className="name">
 					<label>Name</label>
 					<div className="name_container">
 						<input
+							className="fName"
 							type="text"
 							value={fName}
 							onChange={(e) => setfName(xss(e.target.value))}
 							placeholder="First Name"
 						/>
 						<input
+							className="lName"
 							type="text"
 							value={lName}
 							onChange={(e) => setlName(xss(e.target.value))}
@@ -131,7 +135,7 @@ export default function StudentDetail({ email, password, role }) {
 						onChange={(e) => setStudentClass(xss(e.target.value))}
 					/>
 				</div>
-				<div className="section">
+				<div className="studentSection">
 					<label>Section</label>
 					<input
 						type="string"
@@ -142,7 +146,8 @@ export default function StudentDetail({ email, password, role }) {
 				</div>
 			</div>
 			<div className="guardianDetails">
-				<div className="Guardian Name">
+				<h2>Guardian Details</h2>
+				<div className="guardianName">
 					<label>Guardian Name</label>
 					<input
 						type="string"
@@ -188,7 +193,9 @@ export default function StudentDetail({ email, password, role }) {
 					/>
 				</div>
 			</div>
-			<button type="submit">Submit</button>
+			<button className="stdDSubBtn" type="submit">
+				Submit
+			</button>
 		</form>
 	);
 }

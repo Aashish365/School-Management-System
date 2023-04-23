@@ -68,64 +68,72 @@ export default function SignUp() {
 	return (
 		<div className="signup">
 			{!moveForward ? (
-				<div className="container">
-					<h1 className="signup_title">Signup Here</h1>
-					<form className="signupForm" onSubmit={SubmitHandler}>
-						<div className="email">
-							<label htmlFor="email">Email</label>
-							<input
-								name="email"
-								type="text"
-								placeholder="Email"
-								value={email}
-								onChange={emailHandler}
-							/>
-							<div className="warning_msg">{emailStatus.reason}</div>
-						</div>
-						<div className="password">
-							<label htmlFor="password">Password</label>
-							<input
-								name="password"
-								type="password"
-								placeholder="Password"
-								value={password}
-								onChange={passwordHandler}
-							/>
-							<div className="warning_msg">{passwordStatus.reason}</div>
-						</div>
-						<div className="confirmPassword">
-							<label htmlFor="confirmPassword">Confirm Password</label>
-							<input
-								name="confirmPassword"
-								type="password"
-								placeholder="Confirm Password"
-								value={confirmPassword}
-								onChange={confirmPasswordHandler}
-							/>
-						</div>
-						<div className="role">
-							<label htmlFor="role">Role</label>
-							<div className="radioBtn">
-								<RadioButton options={roleOptions} setterFunction={setRole} />
+				<div className="wrapper">
+					<div className="container">
+						<h1 className="signup_title">Signup Here</h1>
+						<form className="signupForm" onSubmit={SubmitHandler}>
+							<div className="email">
+								<label htmlFor="email">Email</label>
+								<input
+									name="email"
+									type="text"
+									placeholder="Email"
+									value={email}
+									onChange={emailHandler}
+								/>
+								<div className="warning_msg">{emailStatus.reason}</div>
 							</div>
-						</div>
-						<button className="nextBtn" type="submit">
-							Next
-						</button>
-					</form>
+							<div className="password">
+								<label htmlFor="password">Password</label>
+								<input
+									name="password"
+									type="password"
+									placeholder="Password"
+									value={password}
+									onChange={passwordHandler}
+								/>
+								<div className="warning_msg">{passwordStatus.reason}</div>
+							</div>
+							<div className="confirmPassword">
+								<label htmlFor="confirmPassword">Confirm Password</label>
+								<input
+									name="confirmPassword"
+									type="password"
+									placeholder="Confirm Password"
+									value={confirmPassword}
+									onChange={confirmPasswordHandler}
+								/>
+							</div>
+							<div className="role">
+								<label htmlFor="role" className="role_title">
+									Role
+								</label>
+								<div className="radioBtn">
+									<RadioButton options={roleOptions} setterFunction={setRole} />
+								</div>
+							</div>
+							<button className="nextBtn" type="submit">
+								Next
+							</button>
+						</form>
 
-					<div className="warning_msg">{message}</div>
-					<div className="alreadySignup">
-						<a href="/">Already SignUp?</a>
+						<div className="warning_msg">{message}</div>
+						<div className="alreadySignup">
+							<a href="/">Already SignUp?</a>
+						</div>
 					</div>
 				</div>
 			) : (
-				<div>
+				<div className="extraInfo">
 					{role === "student" && (
-						<StudentDetail role={role} email={email} password={password} />
+						<div className="studentWrapper">
+							<StudentDetail role={role} email={email} password={password} />
+						</div>
 					)}
 					{role === "faculty" && (
-						<TeacherDetail role={role} email={email} password={password} />
+						<div className="facultyWrapper">
+							<TeacherDetail role={role} email={email} password={password} />
+						</div>
 					)}
 				</div>
 			)}

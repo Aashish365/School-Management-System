@@ -25,17 +25,13 @@ export default function LoginRoute() {
 		},
 	];
 	return (
-		<div>
-			<Router>
-				<Routes>
-					{pages.map((page) => {
-						return (
-							<Route path={page.link} element={page.elem} key={page.link} />
-						);
-					})}
-					<Route path="*" element={<NotFoundPage />} />
-				</Routes>
-			</Router>
-		</div>
+		<Router>
+			<Routes>
+				{pages.map((page) => {
+					return <Route path={page.link} element={page.elem} key={page.link} />;
+				})}
+				<Route path="*" element={<NotFoundPage />} />
+			</Routes>
+		</Router>
 	);
 }

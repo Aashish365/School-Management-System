@@ -56,18 +56,21 @@ export default function TeacherDetail({ role, email, password }) {
 	}
 
 	return (
-		<form onSubmit={submitHandler} className="details">
-			<div className="studentDetails">
+		<form onSubmit={submitHandler} className="detailsTeacherForm">
+			<h1>Enter your Details Here</h1>
+			<div className="teacherDetails">
 				<div className="name">
 					<label>Name</label>
 					<div className="name_container">
 						<input
+							className="fName"
 							type="text"
 							value={fName}
 							onChange={(e) => setfName(xss(e.target.value))}
 							placeholder="First Name"
 						/>
 						<input
+							className="lName"
 							type="text"
 							value={lName}
 							onChange={(e) => setlName(xss(e.target.value))}
@@ -76,6 +79,7 @@ export default function TeacherDetail({ role, email, password }) {
 					</div>
 				</div>
 				<div className="gender">
+					<label>Gender</label>
 					<RadioButton
 						options={genderList}
 						value={gender}
@@ -119,7 +123,7 @@ export default function TeacherDetail({ role, email, password }) {
 					/>
 				</div>
 			</div>
-			<button type="submit" onSubmit={submitHandler}>
+			<button className="tdsubmitBtn" type="submit" onSubmit={submitHandler}>
 				Submit
 			</button>
 		</form>
